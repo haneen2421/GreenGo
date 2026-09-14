@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { background-color: #0d0d0d; font-family: 'Segoe UI', sans-serif; color: #fff; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        
+        .page { display: none; }
+        .active { display: block !important; }
+
+        .main-card { background: #1a1a1a; width: 700px; padding: 40px; border-radius: 20px; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .logo { color: #2ecc71; font-size: 24px; font-weight: bold; }
+        .wallet-badge { border: 1px solid #2ecc71; padding: 5px 15px; border-radius: 10px; color: #2ecc71; cursor: pointer; }
+        
+        .content-body { display: flex; gap: 30px; }
+        .battery-box { text-align: center; border: 1px solid #333; padding: 20px; border-radius: 15px; width: 200px; }
+        .battery-icon { width: 60px; height: 100px; border: 3px solid #2ecc71; margin: 0 auto 10px; border-radius: 10px; position: relative; }
+        .battery-fill { height: 75%; background: #2ecc71; width: 100%; position: absolute; bottom: 0; }
+        
+        .info-panel { flex: 1; }
+        .info-row { margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 5px; color: #aaa; }
+        .info-row span { color: #fff; }
+        
+        .btn-action { background: #2ecc71; color: #000; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; }
+        .btn-outline { background: transparent; border: 1px solid #fff; color: #fff; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 10px; }
+        
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; background: #222; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #333; }
+    </style>
+</head>
+<body>
+
+    <div id="dashboard" class="main-card page active">
+        <div class="header">
+            <div class="logo">GreenGo ⚡</div>
+            <div class="wallet-badge" onclick="showPage('profile')">My Profile</div>
+        </div>
+        <div class="content-body">
+            <div class="battery-box">
+                <div class="battery-icon"><div class="battery-fill"></div></div>
+                <h3>75%</h3>
+                <p>Capacity: 60 kWh</p>
+                <p style="color:#2ecc71">Status: Charging</p>
+            </div>
+            <div class="info-panel">
+                <h2>Welcome, Emad Kattara</h2>
+                <div class="info-row">Location: <span>Zamalek - Exit 4</span></div>
+                <div class="info-row">Range: <span>45 KM remaining</span></div>
+                <div class="info-row">Charging Details: <span>12.5 kW / 35 min left</span></div>
+                
+                <button class="btn-action" onclick="showPage('payment')">Process Payment</button>
+                <button class="btn-outline" onclick="showPage('support')">Contact Support</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="profile" class="main-card page">
+        <h2>Personal Information</h2>
+        <div class="info-row">Car Model: <span>Tesla Model 3</span></div>
+        <div class="info-row">Car Plate: <span>GG-9988</span></div>
+        <div class="info-row">Battery Capacity: <span>60 kWh</span></div>
+        <div class="info-row">ID Number: <span>29805120100456</span></div>
+        
+        <h3 style="margin-top: 30px;">Payment History & QR</h3>
+        <button class="btn-outline" onclick="showPage('history')">View Payment History</button>
+        <button class="btn-outline" onclick="showPage('scanner')">Show Battery QR Code</button>
+        <button class="btn-action" onclick="showPage('dashboard')">Back to Dashboard</button>
+    </div>
+
+    <div id="history" class="main-card page">
+        <h2>Payment History</h2>
+        <table>
+            <tr><th>Date</th><th>Amount</th><th>Service</th></tr>
+            <tr><td>2026-03-10</td><td>$12.00</td><td>Fast Charge</td></tr>
+            <tr><td>2026-03-05</td><td>$5.50</td><td>City Station</td></tr>
+        </table>
+        <button class="btn-action" onclick="showPage('profile')">Back</button>
+    </div>
+
+    <div id="scanner" class="main-card page">
+        <h2>QR Code Scanner</h2>
+        <div style="height: 150px; background: #222; display: flex; align-items: center; justify-content: center; margin: 20px 0;">[ Camera View ]</div>
+        <button class="btn-action" onclick="showPage('qr-result')">Scan QR Code</button>
+        <button class="btn-outline" onclick="showPage('profile')">Back</button>
+    </div>
+
+    <div id="qr-result" class="main-card page">
+        <h2>Battery Information</h2>
+        <div class="info-row">Battery Capacity: <span>60 kWh</span></div>
+        <div class="info-row">Current Charge: <span>75%</span></div>
+        <div class="info-row">Next Service: <span>In 2,000 KM</span></div>
+        <div class="info-row">Need to Charge: <span>When reach 15%</span></div>
+        <button class="btn-action" onclick="showPage('dashboard')">Done</button>
+    </div>
+
+    <div id="payment" class="main-card page">
+        <h2>E-Wallet Payment</h2>
+        <input type="number" placeholder="Enter Amount ($)">
+        <button class="btn-action" onclick="alert('Payment Successful!'); showPage('dashboard');">Confirm Payment</button>
+    </div>
+
+    <div id="support" class="main-card page">
+        <h2>Customer Support</h2>
+        <textarea placeholder="Describe your problem..." rows="4"></textarea>
+        <input type="text" placeholder="Your Phone Number">
+        <button class="btn-action" onclick="alert('Request Sent Successfully!'); showPage('dashboard');">Submit</button>
+    </div>
+
+    <script>
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</body>
+</html>
